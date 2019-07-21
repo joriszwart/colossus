@@ -1,0 +1,14 @@
+html, body, canvas {
+  font: 16px sans-serif;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  width: 100%
+}
+
+#status {
+  color: white;
+  left: 0;
+  position: absolute;
+  top: 0
+}

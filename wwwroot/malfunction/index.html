@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <title>Colossus</title>
+  <style>
+  body {
+    font: 16px sans-serif;
+    padding: 1rem
+  }
+
+  h1 {
+    font-weight: lighter
+  }
+
+  button {
+    background: #27A2CC;
+    color: white;
+    font-size: 20px;
+    margin: 1rem 1rem 0 0;
+    padding: 1.5rem 3rem;
+    width: 12rem
+  }
+  </style>
+ </head>
+ <body>
+  <h1>Colossus</h1>
+
+  <p>Please trigger a malfunction on a machine component of your choice:</p>
+
+  <button data-component="2">hand</button>
+  <button data-component="3">elbow</button>
+  <button data-component="4">arm</button>
+  <button data-component="5">body</button>
+  <button data-component="6">foot</button>
+
+  <p id="status"></p>
+
+  <script src="/js/signalr/signalr-1.1.4.min.js"></script>
+  <script src="/js/client.js" type="module"></script>
+  <script type="module">
+    import { connection, startSignalR } from '/js/client.js'
+
+    startSignalR()
+
+    // send malfunction message on button click
+    const buttons = document.querySelectorAll('button')
+    for(const button of buttons) {
+        const component = button.getAttribute('data-component')
+        button.addEventListener('click', () => {
+            connection.invoke('malfunction', component)
+                .catch(() => document.querySelector('#status').innerText = 'not sent')
+        }, false)
+    }
+  </script>
+ </body>
+</html>
