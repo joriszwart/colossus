@@ -14,6 +14,12 @@ On a command line:
 dotnet run
 ```
 
+or if you want to expose on the network:
+
+```
+dotnet run --urls http://0.0.0.0.0:5000
+```
+
 Point your browser to http://localhost:5000 to see the machine rendered
 in 3D. To control the machine browse to http://localhost:5000/malfunction/.
 
