@@ -16,11 +16,16 @@
 
   button {
     background: #27A2CC;
+    border-bottom: .5rem solid #27A2CC;
     color: white;
     font-size: 20px;
     margin: 1rem 1rem 0 0;
-    padding: 1.5rem 3rem;
+    padding: 1.5rem 3rem 1rem 3rem;
     width: 12rem
+  }
+
+  .malfunction {
+    border-color: #CE5127
   }
   </style>
  </head>
@@ -53,6 +58,14 @@
                 .catch(() => document.querySelector('#status').innerText = 'not sent')
         }, false)
     }
+
+    // receive malfunction messages
+    connection.on('malfunction', component => {
+        for(const button of buttons) {
+            const buttonId = button.getAttribute('data-component')
+            button.className = buttonId == component ? 'malfunction' : ''
+        }
+    })
   </script>
  </body>
 </html>
