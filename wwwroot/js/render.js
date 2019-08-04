@@ -28,9 +28,9 @@ function init(machine) {
     // camera
     /* const */ camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000)
     const angle = 90
-    camera.position.x = Math.cos(angle * Math.PI / 180) * 20
+    camera.position.x = Math.cos(angle * Math.PI / 180) * 15
     camera.position.y = 15
-    camera.position.z = Math.sin(angle * Math.PI / 180) * 20
+    camera.position.z = Math.sin(angle * Math.PI / 180) * 15
     camera.lookAt(0, 5, 0)
 
     // scene
@@ -65,9 +65,15 @@ export function colorComponent(component) {
     let currentComponent = 0
     dae.traverse(child => {
         if(child.isMesh) {
-            child.material.color = currentComponent == component ?
-                new THREE.Color('red') :
-                new THREE.Color('white')
+            if(currentComponent == component) {
+                child.material.color = new THREE.Color('red')
+
+                const subject = new THREE.Vector3()
+                child.localToWorld(subject)
+                camera.lookAt(subject)
+            } else {
+                child.material.color = new THREE.Color('white')
+            }
             currentComponent++
         }
     })
