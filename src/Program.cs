@@ -1,18 +1,24 @@
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+using Colossus;
+using Microsoft.AspNetCore.StaticFiles;
 
-namespace Colossus
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSignalR();
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
-    }
+    app.UseDeveloperExceptionPage();
 }
+
+var options = new FileServerOptions();
+options.StaticFileOptions.ContentTypeProvider = new FileExtensionContentTypeProvider()
+{
+    Mappings = {
+        {".dae", "model/vnd.collada+xml"}
+    }
+};
+app.UseFileServer(options);
+
+app.MapHub<ColossusHub>("/colossushub");
+
+app.Run();

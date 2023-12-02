@@ -42,7 +42,7 @@
 
   <p id="status"></p>
 
-  <script src="/js/signalr/signalr-1.1.4.min.js"></script>
+  <script src="/js/signalr/signalr-8.0.0.min.js"></script>
   <script src="/js/client.js" type="module"></script>
   <script type="module">
     import { connection, startSignalR } from '/js/client.js'
@@ -52,15 +52,15 @@
     // send malfunction message on button click
     const buttons = document.querySelectorAll('button')
     for(const button of buttons) {
-        const component = button.getAttribute('data-component')
+        const component = parseInt(button.getAttribute('data-component'), 10)
         button.addEventListener('click', () => {
-            connection.invoke('malfunction', component)
-                .catch(() => document.querySelector('#status').innerText = 'not sent')
+            connection.invoke('Malfunction', component)
+                .catch(reason => document.querySelector('#status').innerText = `not sent: ${reason}`)
         }, false)
     }
 
     // receive malfunction messages
-    connection.on('malfunction', component => {
+    connection.on('Malfunction', component => {
         for(const button of buttons) {
             const buttonId = button.getAttribute('data-component')
             button.className = buttonId == component ? 'malfunction' : ''

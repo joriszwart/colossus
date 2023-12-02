@@ -4,9 +4,9 @@ namespace Colossus
 {
     public class ColossusHub : Hub
     {
-        public void Malfunction(int component)
+        public async Task Malfunction(int component)
         {
-            Clients.All.SendAsync("Malfunction", component);
+            await Clients.All.SendAsync("Malfunction", component);
         }
     }
 }
