@@ -34,7 +34,7 @@ communication of SignalR.
 Technical
 ---------
 
-- Builds on *.NET Core 2.2*
+- Builds on *.NET 8.0*
 - Loads models in [COLLADA](https://en.wikipedia.org/wiki/COLLADA)-format
 - The 3D rendering is done with the superb [three.js](https://threejs.org)-library and WebGL
 - Real-time communication uses [SignalR](https://dotnet.microsoft.com/apps/aspnet/real-time)
