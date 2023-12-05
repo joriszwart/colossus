@@ -1,84 +1,92 @@
 import * as THREE from '/build/three.module.js'
 import { ColladaLoader } from '/build/loaders/ColladaLoader.js'
 
-let renderer, dae, scene, camera      // TODO non-exported class members
+export default class Renderer {
+    constructor(containerId, modelPath) {
+        this.container = document.querySelector('#' + containerId);
+        this.camera = null;
+        this.scene = null;
+        this.renderer = null;
+        this.model = null;
 
-const loader = new ColladaLoader()
-loader.load('/collada/abb_irb52_7_120.dae', collada => {
-    /* const */ dae = collada.scene
- 
-    dae.traverse(child => {
-        if(child.isMesh) {
-            // model does not have normals
-            child.material.color = new THREE.Color('white')
-            child.material.flatShading = true
-        }
-    })
+        this.init(modelPath);
+    }
 
-    dae.scale.x = dae.scale.y = dae.scale.z = 10.0
-    dae.updateMatrix()
+    init(modelPath) {
+        const loader = new ColladaLoader();
+        loader.load(modelPath, collada => {
+            this.model = collada.scene;
 
-    init(dae)
-})
+            this.model.traverse(child => {
+                if (child.isMesh) {
+                    child.material.color = new THREE.Color('white');
+                    child.material.flatShading = true;
+                }
+            });
 
+            this.model.scale.x = this.model.scale.y = this.model.scale.z = 10.0;
+            this.model.updateMatrix();
 
-function init(machine) {
-    const container = document.querySelector('body')
+            this.setupScene();
+        });
+    }
 
-    // camera
-    /* const */ camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000)
-    const angle = 90
-    camera.position.x = Math.cos(angle * Math.PI / 180) * 15
-    camera.position.y = 15
-    camera.position.z = Math.sin(angle * Math.PI / 180) * 15
-    camera.lookAt(0, 5, 0)
+    setupScene() {
+        // camera
+        this.camera = new THREE.PerspectiveCamera(45, this.container.clientWidth / this.container.clientHeight, 1, 2000);
+        const angle = 90;
+        this.camera.position.x = Math.cos(angle * Math.PI / 180) * 15;
+        this.camera.position.y = 15;
+        this.camera.position.z = Math.sin(angle * Math.PI / 180) * 15;
+        this.camera.lookAt(0, 5, 0);
 
-    // scene
-    /* const */ scene = new THREE.Scene()
-    scene.add(machine)
+        // scene
+        this.scene = new THREE.Scene();
+        this.scene.add(this.model);
 
-    const grid = new THREE.GridHelper(20, 20)
-    scene.add(grid)
+        const grid = new THREE.GridHelper(20, 20);
+        this.scene.add(grid);
 
-    // lights
-    const light = new THREE.HemisphereLight(0xffffff, 0x888888)
-    scene.add(light)
+        // lights
+        const light = new THREE.HemisphereLight(0xffffff, 0x888888);
+        this.scene.add(light);
 
-    // renderer
-    /* const */ renderer  = new THREE.WebGLRenderer()
-    renderer.setPixelRatio(window.devicePixelRatio)
-    renderer.setSize(window.innerWidth, innerHeight)
-    container.appendChild(renderer.domElement)
+        // renderer
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+        this.container.appendChild(this.renderer.domElement);
 
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight
-        camera.updateProjectionMatrix()
-        renderer.setSize(window.innerWidth, window.innerHeight)
-        renderer.render(scene, camera)
-    }, false)
+        window.addEventListener('resize', () => {
+            this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+            this.render();
+        }, false);
 
-    // one shot
-    renderer.render(scene, camera)
-}
+        // one shot
+        this.render();
+    }
 
-export function colorComponent(component) {
-    let currentComponent = 0
-    dae.traverse(child => {
-        if(child.isMesh) {
-            if(currentComponent == component) {
-                child.material.color = new THREE.Color('red')
+    colorComponent(component) {
+        let currentComponent = 0;
+        this.model.traverse(child => {
+            if (child.isMesh) {
+                if (currentComponent === component) {
+                    child.material.color = new THREE.Color('red');
 
-                const subject = new THREE.Vector3()
-                child.localToWorld(subject)
-                camera.lookAt(subject)
-            } else {
-                child.material.color = new THREE.Color('white')
+                    const subject = new THREE.Vector3();
+                    child.localToWorld(subject);
+                    this.camera.lookAt(subject);
+                } else {
+                    child.material.color = new THREE.Color('white');
+                }
+                currentComponent++;
             }
-            currentComponent++
-        }
-    })
-}
+        });
+    }
 
-export function render() {
-    renderer.render(scene, camera)
+    render() {
+        this.renderer.render(this.scene, this.camera);
+    }
 }

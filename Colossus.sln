@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Colossus", "Colossus.csproj", "{D105D0CD-C300-4539-93B0-D9DC5006416B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D105D0CD-C300-4539-93B0-D9DC5006416B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D105D0CD-C300-4539-93B0-D9DC5006416B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D105D0CD-C300-4539-93B0-D9DC5006416B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D105D0CD-C300-4539-93B0-D9DC5006416B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {652CC1DE-CFB8-4617-97B9-247EC8C4ADE1}
+	EndGlobalSection
+EndGlobal

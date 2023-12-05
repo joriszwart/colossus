@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html>
- <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <title>Colossus - abb_irb52_7_120</title>
-  <link href="/css/colossus.css" rel="stylesheet">
- </head>
- <body>
-  <div id="status"></div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Colossus - abb_irb52_7_120</title>
+    <link href="/css/colossus.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Div voor de eerste weergave -->
+    <div id="view1" style="width:640px;height:480px"></div>
 
-  <script src="/js/signalr/signalr-8.0.0.min.js"></script>
-  <script src="/js/client.js" type="module"></script>
-  <script src="/js/render.js" type="module"></script>
-  <script type="module">
-    import { connection, startSignalR } from '/js/client.js'
-    import { colorComponent, render } from '/js/render.js';
+    <!-- Div voor de tweede weergave -->
+    <div id="view2" style="width:640px;height:480px"></div>
 
-    // receive malfunction messages
-    connection.on('malfunction', component => {
-        colorComponent(component)
-        window.requestAnimationFrame(render)
-    })
+    <div id="status"></div>
 
-    startSignalR()
-  </script>
- </body>
+    <script src="/js/signalr/signalr-8.0.0.min.js"></script>
+
+    <script type="module">
+        // Importeer de nieuwe klassen
+        import Client from '/js/client.js';
+        import Renderer from '/js/render.js';
+
+        // Maak een instantie van de Client-klasse
+        const client = new Client('/colossushub', 'status');
+        client.start();
+
+        // Maak een instantie van de ThreeScene-klasse voor elke container
+        const scene1 = new Renderer('view1', '/collada/abb_irb52_7_120.dae');
+        const scene2 = new Renderer('view2', '/collada/abb_irb52_7_120.dae');
+        // Voeg meer instanties toe indien nodig
+
+        // Ontvang defectmeldingen
+        client.connection.on('malfunction', component => {
+            // Roep de colorComponent-methode aan voor de juiste scene-instantie
+            scene1.colorComponent(component);
+            scene2.colorComponent(component);
+            // Roep render aan voor alle instanties (indien nodig)
+            scene1.render();
+            scene2.render();
+        });
+    </script>
+</body>
 </html>
