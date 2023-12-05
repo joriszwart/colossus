@@ -40,6 +40,13 @@ Technical
 - Real-time communication uses [SignalR](https://dotnet.microsoft.com/apps/aspnet/real-time)
 
 
+Changes by J. van Langen
+---------
+
+- Put function into classes, so multiple instances are possible.
+
+   
+
 Author: joriszwart.nl  
 License: Apache-2.0 license (threejs is MIT, but the robot model and SignalR have Apache-2.0 licenses)  
 Date: Jul 18 14:04:16 2019  
