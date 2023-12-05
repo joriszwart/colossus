@@ -43,7 +43,7 @@ Technical
 Changes by J. van Langen
 ---------
 
-- Put function into classes, so multiple instances are possible.
+- Put the functions into classes, so multiple instances are possible.
 
    
 
