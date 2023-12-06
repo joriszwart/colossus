@@ -27,11 +27,7 @@ function init(machine) {
 
     // camera
     /* const */ camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000)
-    const angle = 90
-    camera.position.x = Math.cos(angle * Math.PI / 180) * 15
-    camera.position.y = 15
-    camera.position.z = Math.sin(angle * Math.PI / 180) * 15
-    camera.lookAt(0, 5, 0)
+    let angle = 90
 
     // scene
     /* const */ scene = new THREE.Scene()
@@ -57,8 +53,21 @@ function init(machine) {
         renderer.render(scene, camera)
     }, false)
 
-    // one shot
-    renderer.render(scene, camera)
+    // action!
+    const renderLoop = () => {
+        camera.position.x = Math.cos(angle * Math.PI / 180) * 15
+        camera.position.y = 15
+        camera.position.z = Math.sin(angle * Math.PI / 180) * 15
+        camera.lookAt(0, 5, 0)
+        angle += .1
+
+        renderer.render(scene, camera)
+
+
+        requestAnimationFrame(renderLoop)
+    }
+
+    renderLoop();
 }
 
 export function colorComponent(component) {
