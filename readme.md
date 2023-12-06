@@ -4,6 +4,9 @@ Colossus
 This is a proof-of-concept (PoC) to demonstrate that visualization of a
 machine with WebGL and SignalR is possible.
 
+This is a minimal PoC. A more extensive version can be found at
+[github.com/jvanlangen/colossus](https://github.com/jvanlangen/colossus).
+
 
 Build and run
 -------------
