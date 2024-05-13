@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.SignalR;
 
-namespace Colossus
+namespace Colossus;
+
+public class ColossusHub : Hub
 {
-    public class ColossusHub : Hub
+    public async Task Malfunction(int component)
     {
-        public async Task Malfunction(int component)
-        {
-            await Clients.All.SendAsync("Malfunction", component);
-        }
+        await Clients.All.SendAsync("Malfunction", component);
     }
 }
