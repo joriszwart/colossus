@@ -14,21 +14,21 @@ Build and run
 On a command line:
 
 ```
-dotnet run
+dotnet run --project Colossus.SignalR
 ```
 
 or if you want to expose on the network:
 
 ```
-dotnet run --urls http://0.0.0.0.0:5000
+dotnet run --project Colossus.SignalR --urls https://0.0.0.0.0:5000
 ```
 
-Point your browser to http://localhost:5000 to see the machine rendered
-in 3D. To control the machine browse to http://localhost:5000/malfunction/.
+Point your browser to https://localhost:5000 to see the machine rendered
+in 3D. To control the machine browse to https://localhost:5000/malfunction/.
 
 You should see something like this:
 
-[![screenshot of colossus visualizer and malfunction controller](wwwroot/images/screenshot.png)](wwwroot/images/screenshot.png)
+[![screenshot of colossus visualizer and malfunction controller](Colossus.Web/wwwroot/images/screenshot.png)](Colossus.Web/wwwroot/images/screenshot.png)
 
 Note that the two browsers could be on different machines due to the real-time
 communication of SignalR.
