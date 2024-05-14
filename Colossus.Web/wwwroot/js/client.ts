@@ -6,10 +6,10 @@ export const connection = new HubConnectionBuilder()
     .build()
 
 export function startSignalR() {
-    document.querySelector('#status').innerText = ''
+    document.querySelector('#status')!.textContent = ''
     connection.start()
         .catch(() => {
-            document.querySelector('#status').innerText = 'not connected'
+            document.querySelector('#status')!.textContent = 'not connected'
             setTimeout(startSignalR, 5000)      // TODO fibonacci wait times
         })
 }

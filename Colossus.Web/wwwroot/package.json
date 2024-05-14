@@ -2,9 +2,9 @@
   "name": "colossus.web",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "build": "esbuild --bundle index.js --outdir=dist --minify --sourcemap && esbuild --bundle malfunction/malfunction.js --outfile=dist/malfunction.js --minify --sourcemap"
+    "build": "tsc && esbuild --bundle index.ts --format=esm --outdir=dist --minify --sourcemap && esbuild --bundle malfunction/malfunction.ts --format=esm --outfile=dist/malfunction.js --minify --sourcemap"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/joriszwart/colossus#readme",
   "devDependencies": {
+    "@types/three": "^0.164.0",
     "esbuild": "0.21.2"
   },
   "dependencies": {
