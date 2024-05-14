@@ -1,4 +1,4 @@
-import { connection, startSignalR } from '/js/client.js'
+import { connection, startSignalR } from '../js/client.js'
 
 startSignalR()
 

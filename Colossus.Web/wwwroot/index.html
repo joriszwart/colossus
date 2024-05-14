@@ -9,20 +9,6 @@
  <body>
   <div id="status"></div>
 
-  <script src="/js/signalr/signalr-8.0.0.min.js"></script>
-  <script src="/js/client.js" type="module"></script>
-  <script src="/js/render.js" type="module"></script>
-  <script type="module">
-    import { connection, startSignalR } from '/js/client.js'
-    import { colorComponent, render } from '/js/render.js';
-
-    // receive malfunction messages
-    connection.on('malfunction', component => {
-        colorComponent(component)
-        window.requestAnimationFrame(render)
-    })
-
-    startSignalR()
-  </script>
+  <script src="/dist/index.js" type="module"></script>
  </body>
 </html>

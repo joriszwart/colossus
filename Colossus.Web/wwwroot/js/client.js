@@ -1,4 +1,6 @@
-export const connection = new signalR.HubConnectionBuilder()
+import { HubConnectionBuilder } from '@microsoft/signalr'
+
+export const connection = new HubConnectionBuilder()
     .withUrl('/colossushub')
     .withAutomaticReconnect([0, 3000, 5000, 10000, 15000, 30000])
     .build()

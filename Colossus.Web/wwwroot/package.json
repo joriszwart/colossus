@@ -1,0 +1,31 @@
+{
+  "name": "colossus.web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild --bundle index.js --outdir=dist --minify --sourcemap && esbuild --bundle malfunction/malfunction.js --outfile=dist/malfunction.js --minify --sourcemap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joriszwart/colossus.git"
+  },
+  "keywords": [
+    "Collada",
+    "SignalR",
+    "Three.js"
+  ],
+  "author": "Joris Zwart",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joriszwart/colossus/issues"
+  },
+  "homepage": "https://github.com/joriszwart/colossus#readme",
+  "devDependencies": {
+    "esbuild": "0.21.2"
+  },
+  "dependencies": {
+    "@microsoft/signalr": "^8.0.0",
+    "three": "^0.164.1"
+  }
+}

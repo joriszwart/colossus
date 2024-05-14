@@ -1,5 +1,5 @@
-import * as THREE from '/build/three.module.js'
-import { ColladaLoader } from '/build/loaders/ColladaLoader.js'
+import * as THREE from 'three'
+import { ColladaLoader } from 'three/addons'
 
 let renderer, dae, scene, camera      // TODO non-exported class members
 
