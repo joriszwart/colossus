@@ -51,6 +51,7 @@ function init(machine: THREE.Object3D<THREE.Object3DEventMap>) {
 
     // lights
     const light = new THREE.HemisphereLight(0xffffff, 0x888888)
+    light.intensity = 3
     scene.add(light)
 
     // renderer
