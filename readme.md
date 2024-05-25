@@ -11,15 +11,23 @@ This is a minimal PoC. A more extensive version can be found at
 Build and run
 -------------
 
-On a command line:
+Build the frontend first:
 
+```shell
+# in wwwroot
+npm run build`
 ```
+
+
+Then run the backend:
+
+```shell
 dotnet run --project Colossus.SignalR
 ```
 
 or if you want to expose on the network:
 
-```
+```shell
 dotnet run --project Colossus.SignalR --urls https://0.0.0.0.0:5000
 ```
 
