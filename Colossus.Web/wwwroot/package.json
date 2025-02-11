@@ -23,7 +23,7 @@
   "homepage": "https://github.com/joriszwart/colossus#readme",
   "devDependencies": {
     "@types/three": "^0.164.0",
-    "esbuild": "0.21.2"
+    "esbuild": "0.25.0"
   },
   "dependencies": {
     "@microsoft/signalr": "^8.0.0",
